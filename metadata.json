@@ -1,0 +1,6 @@
+{
+  "name": "FOX",
+  "description": "Siêu ứng dụng đa dịch vụ tại Việt Nam: Đặt xe, Giao hàng, Đặt đồ ăn, Mua sắm",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

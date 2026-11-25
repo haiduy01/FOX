@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Main bold FOX orange fox head silhouette inside 66dp safe zone (21..87) -->
+    <path
+        android:fillColor="#FFFF7448"
+        android:pathData="M29,29 L45,41 L63,41 L79,29 L82,53 L69,70 L54,82 L39,70 L26,53 Z" />
+    <!-- Inner ear accents -->
+    <path
+        android:fillColor="#FFFFB093"
+        android:pathData="M33,35 L42,42 L34,47 Z" />
+    <path
+        android:fillColor="#FFFFB093"
+        android:pathData="M75,35 L66,42 L74,47 Z" />
+    <!-- White cheek & snout accents -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M30,56 L45,60 L54,78 L39,69 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M78,56 L63,60 L54,78 L69,69 Z" />
+    <!-- Expressive eyes & nose -->
+    <path
+        android:fillColor="#FF17243B"
+        android:pathData="M41,53 A3.2,3.2 0 1,0 47.4,53 A3.2,3.2 0 1,0 41,53 Z" />
+    <path
+        android:fillColor="#FF17243B"
+        android:pathData="M60.6,53 A3.2,3.2 0 1,0 67,53 A3.2,3.2 0 1,0 60.6,53 Z" />
+    <path
+        android:fillColor="#FF17243B"
+        android:pathData="M49,73 L59,73 L54,79 Z" />
+</vector>

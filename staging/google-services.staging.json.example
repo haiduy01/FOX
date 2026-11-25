@@ -1,0 +1,40 @@
+{
+  "_comment": "PLACEHOLDER ONLY — Download the REAL google-services.json from your isolated Firebase Staging Console and save it as staging/google-services.staging.json (git-ignored). NEVER use gen-lang-client-0957111252 here.",
+  "project_info": {
+    "project_number": "000000000000",
+    "project_id": "your-fox-pilot-staging-project-id",
+    "storage_bucket": "your-fox-pilot-staging-project-id.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:000000000000:android:0000000000000000000000",
+        "android_client_info": {
+          "package_name": "com.aistudio.fox.superapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "000000000000-replace-with-staging-web-client-id.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "REPLACE_WITH_STAGING_GOOGLE_SERVICES_JSON"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "000000000000-replace-with-staging-web-client-id.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

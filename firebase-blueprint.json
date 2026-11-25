@@ -1,0 +1,341 @@
+{
+  "entities": {
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Explicit admin allowlist entry granting verified admin privileges.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID of the administrator" },
+        "grantedAt": { "type": "string", "format": "date-time", "description": "Server timestamp when admin access was granted" }
+      },
+      "required": ["uid", "grantedAt"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated FOX user profile with zero-trust 4-role RBAC (customer, driver, merchant, admin).",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "defaultAddress": { "type": "string" },
+        "role": { "type": "string", "enum": ["customer", "driver", "merchant", "admin"] },
+        "requestedRole": { "type": "string", "enum": ["none", "driver", "merchant"] },
+        "driverStatus": { "type": "string", "enum": ["none", "pending", "approved", "rejected"] },
+        "merchantStatus": { "type": "string", "enum": ["none", "pending", "approved", "rejected"] },
+        "accountStatus": { "type": "string", "enum": ["active", "suspended"] },
+        "vehicleType": { "type": "string" },
+        "vehiclePlate": { "type": "string" },
+        "storeName": { "type": "string" },
+        "storeCategory": { "type": "string" },
+        "driverOnline": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "userId", "displayName", "email", "phone", "defaultAddress",
+        "role", "requestedRole", "driverStatus", "merchantStatus", "accountStatus",
+        "vehicleType", "vehiclePlate", "storeName", "storeCategory", "driverOnline",
+        "createdAt", "updatedAt"
+      ]
+    },
+    "MerchantStore": {
+      "title": "MerchantStore",
+      "description": "Cloud restaurant or shop profile owned by merchantId/ownerUid with operating hours and open/closed status.",
+      "type": "object",
+      "properties": {
+        "merchantId": { "type": "string" },
+        "ownerUid": { "type": "string" },
+        "storeType": { "type": "string", "enum": ["FOOD", "SHOPPING"] },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "openingHours": { "type": "string" },
+        "openNow": { "type": "boolean" },
+        "ratingTenths": { "type": "integer" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "merchantId", "ownerUid", "storeType", "name", "description",
+        "category", "address", "phone", "imageUrl", "openingHours",
+        "openNow", "ratingTenths", "active", "createdAt", "updatedAt"
+      ]
+    },
+    "MerchantProduct": {
+      "title": "MerchantProduct",
+      "description": "Product or menu dish owned exclusively by an approved merchant under /merchants/{merchantId}/products/{productId}.",
+      "type": "object",
+      "properties": {
+        "merchantId": { "type": "string" },
+        "storeName": { "type": "string" },
+        "serviceType": { "type": "string", "enum": ["FOOD", "SHOPPING"] },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "category": { "type": "string" },
+        "priceVnd": { "type": "integer" },
+        "stock": { "type": "integer" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "merchantId", "storeName", "serviceType", "name", "description",
+        "imageUrl", "category", "priceVnd", "stock", "active", "createdAt", "updatedAt"
+      ]
+    },
+    "CloudOrder": {
+      "title": "CloudOrder",
+      "description": "Shared multi-device FOX order with server-verified integer VND pricing, DEMO payment status, stock tracking, and commission settlement fields.",
+      "type": "object",
+      "properties": {
+        "orderCode": { "type": "string" },
+        "serviceType": { "type": "string", "enum": ["RIDE", "DELIVERY", "FOOD", "SHOPPING"] },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "driverId": { "type": "string" },
+        "driverName": { "type": "string" },
+        "merchantId": { "type": "string" },
+        "merchantName": { "type": "string" },
+        "title": { "type": "string" },
+        "primaryAddress": { "type": "string" },
+        "secondaryAddress": { "type": "string" },
+        "detailSummary": { "type": "string" },
+        "subtotalVnd": { "type": "integer" },
+        "feeVnd": { "type": "integer" },
+        "discountVnd": { "type": "integer" },
+        "totalVnd": { "type": "integer" },
+        "paymentMethod": { "type": "string", "enum": ["Ví FOX DEMO", "Tiền mặt DEMO"] },
+        "voucherCode": { "type": "string" },
+        "financialStatus": { "type": "string", "enum": ["unverified_backend_required", "verified_demo", "settled_demo"] },
+        "paymentStatus": { "type": "string", "enum": ["pending_cash_demo", "paid_demo", "refunded_demo", "settled_cash_demo"] },
+        "paymentId": { "type": "string" },
+        "refundStatus": { "type": "string", "enum": ["none", "refunded_demo", "not_applicable"] },
+        "driverCommissionVnd": { "type": "integer" },
+        "merchantCommissionVnd": { "type": "integer" },
+        "platformRevenueVnd": { "type": "integer" },
+        "commissionSettled": { "type": "boolean" },
+        "stockDeducted": { "type": "boolean" },
+        "stockRestored": { "type": "boolean" },
+        "items": { "type": "array" },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending", "merchant_confirmed", "preparing", "ready_for_pickup",
+            "driver_accepted", "driver_arrived", "in_progress", "completed", "cancelled"
+          ]
+        },
+        "dispatchOpen": { "type": "boolean" },
+        "dispatchTarget": { "type": "string", "enum": ["driver", "merchant", "none"] },
+        "pickupLat": { "type": "number" },
+        "pickupLng": { "type": "number" },
+        "dropoffLat": { "type": "number" },
+        "dropoffLng": { "type": "number" },
+        "distanceMeters": { "type": "integer" },
+        "distanceKm": { "type": "integer" },
+        "durationMinutes": { "type": "integer" },
+        "routeSource": { "type": "string" },
+        "isDemoRoute": { "type": "boolean" },
+        "encodedPolyline": { "type": "string" },
+        "customerRating": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "customerReviewNote": { "type": "string" },
+        "ratedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "orderCode", "serviceType", "customerId", "customerName",
+        "driverId", "driverName", "merchantId", "merchantName",
+        "title", "primaryAddress", "secondaryAddress", "detailSummary",
+        "subtotalVnd", "feeVnd", "discountVnd", "totalVnd",
+        "paymentMethod", "voucherCode", "financialStatus", "status",
+        "dispatchOpen", "dispatchTarget", "createdAt", "updatedAt"
+      ]
+    },
+    "DemoWallet": {
+      "title": "DemoWallet",
+      "description": "Server-managed DEMO wallet (integer VND, DEMO — KHÔNG PHẢI TIỀN THẬT). Client writes strictly denied.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "balanceVnd": { "type": "integer" },
+        "totalTopUpVnd": { "type": "integer" },
+        "totalSpentVnd": { "type": "integer" },
+        "totalEarnedVnd": { "type": "integer" },
+        "totalRefundedVnd": { "type": "integer" },
+        "currency": { "type": "string", "enum": ["VND"] },
+        "isDemo": { "type": "boolean" },
+        "demoNotice": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "balanceVnd", "currency", "isDemo", "demoNotice", "updatedAt"]
+    },
+    "DemoWalletTransaction": {
+      "title": "DemoWalletTransaction",
+      "description": "Immutable DEMO wallet ledger entry written exclusively by Cloud Functions Admin SDK.",
+      "type": "object",
+      "properties": {
+        "txId": { "type": "string" },
+        "userId": { "type": "string" },
+        "txType": {
+          "type": "string",
+          "enum": ["TOPUP_DEMO", "PAYMENT_DEMO", "REFUND_DEMO", "DRIVER_COMMISSION_DEMO", "MERCHANT_COMMISSION_DEMO"]
+        },
+        "title": { "type": "string" },
+        "amountVnd": { "type": "integer" },
+        "balanceAfterVnd": { "type": "integer" },
+        "relatedOrderCode": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "succeeded", "failed"] },
+        "idempotencyKey": { "type": "string" },
+        "isDemo": { "type": "boolean" },
+        "demoNotice": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["txId", "userId", "txType", "title", "amountVnd", "balanceAfterVnd", "status", "idempotencyKey", "isDemo", "createdAt"]
+    },
+    "PlatformRevenueEntry": {
+      "title": "PlatformRevenueEntry",
+      "description": "FOX DEMO platform revenue ledger written exclusively by Cloud Functions Admin SDK upon order settlement.",
+      "type": "object",
+      "properties": {
+        "orderId": { "type": "string" },
+        "orderCode": { "type": "string" },
+        "serviceType": { "type": "string", "enum": ["RIDE", "DELIVERY", "FOOD", "SHOPPING"] },
+        "customerId": { "type": "string" },
+        "driverId": { "type": "string" },
+        "merchantId": { "type": "string" },
+        "grossTotalVnd": { "type": "integer" },
+        "driverCommissionVnd": { "type": "integer" },
+        "merchantCommissionVnd": { "type": "integer" },
+        "platformRevenueVnd": { "type": "integer" },
+        "currency": { "type": "string", "enum": ["VND"] },
+        "isDemo": { "type": "boolean" },
+        "demoNotice": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderId", "serviceType", "grossTotalVnd", "driverCommissionVnd", "merchantCommissionVnd", "platformRevenueVnd", "currency", "isDemo", "createdAt"]
+    },
+    "DriverLiveLocation": {
+      "title": "DriverLiveLocation",
+      "description": "Single overwritten live driver position doc per active order (/orders/{orderId}/live_location/driver). Strictly rate-limited, foreground-only, zero location history, deleted on completion/cancellation.",
+      "type": "object",
+      "properties": {
+        "orderId": { "type": "string" },
+        "driverId": { "type": "string" },
+        "driverName": { "type": "string" },
+        "lat": { "type": "number" },
+        "lng": { "type": "number" },
+        "bearing": { "type": "number" },
+        "speedMps": { "type": "number" },
+        "accuracyMeters": { "type": "number" },
+        "isDemo": { "type": "boolean" },
+        "updatedAtMillis": { "type": "integer" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderId", "driverId", "driverName", "lat", "lng", "isDemo", "updatedAtMillis", "updatedAt"]
+    },
+    "CloudNotification": {
+      "title": "CloudNotification",
+      "description": "Per-user role-targeted cloud notification stored under /users/{userId}/notifications.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "relatedOrderCode": { "type": "string" },
+        "orderId": { "type": "string" },
+        "serviceType": { "type": "string" },
+        "targetRole": { "type": "string", "enum": ["customer", "driver", "merchant", "admin"] },
+        "eventType": { "type": "string" },
+        "readFlag": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "body", "relatedOrderCode", "readFlag", "createdAt"]
+    },
+    "FcmDeviceToken": {
+      "title": "FcmDeviceToken",
+      "description": "Owner-isolated Android FCM registration token stored under /users/{userId}/fcm_tokens/{tokenId}.",
+      "type": "object",
+      "properties": {
+        "token": { "type": "string" },
+        "platform": { "type": "string", "enum": ["android"] },
+        "role": { "type": "string", "enum": ["customer", "driver", "merchant", "admin"] },
+        "enabled": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["token", "platform", "role", "enabled", "updatedAt"]
+    },
+    "VoucherRedemption": {
+      "title": "VoucherRedemption",
+      "description": "Server-managed per-user single-use voucher lock written exclusively by Cloud Functions Admin SDK.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "voucherCode": { "type": "string" },
+        "orderId": { "type": "string" },
+        "orderCode": { "type": "string" },
+        "serviceType": { "type": "string", "enum": ["RIDE", "DELIVERY", "FOOD", "SHOPPING"] },
+        "discountVnd": { "type": "integer" },
+        "isDemo": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "voucherCode", "orderId", "serviceType", "discountVnd", "isDemo", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/admins/{uid}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Verified administrator allowlist records."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "PII-isolated user profiles and RBAC role approval states."
+    },
+    "/users/{userId}/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/CloudNotification" },
+      "description": "User-scoped role-targeted notifications."
+    },
+    "/users/{userId}/fcm_tokens/{tokenId}": {
+      "schema": { "$ref": "#/entities/FcmDeviceToken" },
+      "description": "Strictly owner-isolated Android FCM device tokens used by Cloud Functions Admin SDK to send push notifications."
+    },
+    "/merchants/{merchantId}": {
+      "schema": { "$ref": "#/entities/MerchantStore" },
+      "description": "Cloud restaurant & shop store profiles strictly owned by merchantId/ownerUid."
+    },
+    "/merchants/{merchantId}/products/{productId}": {
+      "schema": { "$ref": "#/entities/MerchantProduct" },
+      "description": "Merchant-owned catalog dishes & products strictly isolated per merchantId."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/CloudOrder" },
+      "description": "Shared multi-device FOX orders with strict role read isolation, merchant isolation, atomic claim transactions, stock tracking, verified route metadata, and server-verified DEMO financial fields."
+    },
+    "/orders/{orderId}/live_location/{slotId}": {
+      "schema": { "$ref": "#/entities/DriverLiveLocation" },
+      "description": "Single live location slot (slotId == 'driver') writable only by the approved assigned driver on an active order with 4s rate limit; readable only by the order's customer, assigned driver, or admin."
+    },
+    "/wallets/{userId}": {
+      "schema": { "$ref": "#/entities/DemoWallet" },
+      "description": "Owner/Admin read-only DEMO wallet balances; writes strictly restricted to trusted Cloud Functions Admin SDK."
+    },
+    "/wallets/{userId}/transactions/{txId}": {
+      "schema": { "$ref": "#/entities/DemoWalletTransaction" },
+      "description": "Owner/Admin read-only immutable DEMO ledger transactions; writes strictly restricted to trusted Cloud Functions Admin SDK."
+    },
+    "/platform_revenue/{entryId}": {
+      "schema": { "$ref": "#/entities/PlatformRevenueEntry" },
+      "description": "Verified Admin read-only FOX DEMO platform revenue ledger; writes strictly restricted to trusted Cloud Functions Admin SDK."
+    },
+    "/voucher_redemptions/{redemptionId}": {
+      "schema": { "$ref": "#/entities/VoucherRedemption" },
+      "description": "Per-user single-use voucher redemption records written exclusively by Cloud Functions; owner/admin read-only."
+    }
+  }
+}

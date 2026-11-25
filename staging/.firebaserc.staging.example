@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "staging": "your-fox-pilot-staging-project-id"
+  },
+  "targets": {
+    "your-fox-pilot-staging-project-id": {
+      "firestore": {
+        "fox-staging-db": [
+          "fox-staging-db"
+        ]
+      }
+    }
+  }
+}

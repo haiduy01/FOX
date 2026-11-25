@@ -1,0 +1,22 @@
+{
+  "name": "fox-cloud-functions",
+  "version": "1.0.0",
+  "description": "FOX Super App Firebase Cloud Functions v2 (TypeScript) for server-side pricing, DEMO wallet ledger, payments, refunds, and commissions.",
+  "main": "lib/index.js",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test:emulator": "FIRESTORE_EMULATOR_HOST=127.0.0.1:8085 node --test test/finance.emulator.test.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.2.0",
+    "firebase-functions": "^6.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.3"
+  },
+  "private": true
+}

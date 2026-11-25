@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">FOX</string>
+    <string name="fox_slogan">Chạm là tới!</string>
+    <string name="home_greeting">Xin chào bạn mới!</string>
+    <string name="home_subtitle">Hôm nay bạn muốn FOX phục vụ gì?</string>
+    <string name="home_search_placeholder">Tìm dịch vụ, món ăn, điểm đến...</string>
+    <string name="section_services">Dịch vụ nổi bật</string>
+    <string name="section_promos">Ưu đãi nổi bật (DEMO)</string>
+    <string name="section_quick_status">Trạng thái nền tảng Android</string>
+
+    <string name="service_ride_title">Đặt xe</string>
+    <string name="service_ride_desc">FOX Bike, Car 4 &amp; Car 7</string>
+    <string name="service_delivery_title">Giao hàng</string>
+    <string name="service_delivery_desc">Giao siêu tốc nội thành</string>
+    <string name="service_food_title">Đặt đồ ăn</string>
+    <string name="service_food_desc">Món ngon giao nóng hổi</string>
+    <string name="service_shopping_title">Mua sắm</string>
+    <string name="service_shopping_desc">Siêu thị &amp; gian hàng chính hãng</string>
+
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_orders">Hoạt động</string>
+    <string name="nav_wallet">Ví FOX</string>
+    <string name="nav_account">Tài khoản</string>
+
+    <string name="badge_demo_offline">DEMO UI • Chưa kết nối backend</string>
+    <string name="notice_wallet_demo">DEMO – Không phải tiền thật. Số dư chỉ được cập nhật bởi backend đáng tin cậy.</string>
+    <string name="notice_backend_pending">Bản khởi chạy nền tảng Android: Dữ liệu hiện chỉ lưu tạm trong bộ nhớ thiết bị, chưa đồng bộ Firebase/Backend.</string>
+
+    <string name="cd_back">Quay lại</string>
+    <string name="cd_notifications">Thông báo</string>
+    <string name="cd_search">Tìm kiếm</string>
+    <string name="cd_clear_search">Xóa tìm kiếm</string>
+    <string name="cd_fox_mascot">Linh vật cáo FOX</string>
+</resources>
